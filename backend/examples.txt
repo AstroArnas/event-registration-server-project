@@ -1,0 +1,79 @@
+1. Login as organizer
+
+
+graphql
+mutation {
+  login(input: {
+    email: "organizer@example.com"
+    password: "password123"
+  }) {
+    token
+    user {
+      name
+      role
+    }
+  }
+}
+2. Create an event
+
+
+graphql
+mutation {
+  createEvent(input: {
+    title: "Programming Workshop"
+    description: "Learn JavaScript"
+    location: "Vilnius"
+    date: "2027-08-20T12:00:00Z"
+    capacity: 30
+    category: "CATEGORY_ID"
+  }) {
+    id
+    title
+    status
+  }
+}
+3. Publish an event
+
+
+graphql
+mutation {
+  publishEvent(id: "EVENT_ID") {
+    title
+    status
+  }
+}
+4. Login as participant
+
+
+graphql
+mutation {
+  login(input: {
+    email: "participant1@example.com"
+    password: "password123"
+  }) {
+    token
+  }
+}
+5. Register for an event
+
+
+graphql
+mutation {
+  registerForEvent(eventId: "EVENT_ID") {
+    id
+    status
+  }
+}
+6. View registrations
+
+
+graphql
+query {
+  myRegistrations {
+    status
+    event {
+      title
+      location
+    }
+  }
+}
