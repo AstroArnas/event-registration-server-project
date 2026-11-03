@@ -170,9 +170,7 @@ class EventService {
     }
 
     const [items, total] = await Promise.all([
-      Event.find(query)
-        .populate("category")
-        .populate("organizer")
+        Event.find(query)
         .sort({ date: sort === "DESC" ? -1 : 1 })
         .skip((page - 1) * limit)
         .limit(limit),
@@ -193,10 +191,7 @@ class EventService {
     return Event.findOne({
       _id: id,
       status: "PUBLISHED"
-    })
-      .populate("category")
-      .populate("organizer");
-  }
+    })}
 }
 
 export default new EventService();
