@@ -5,6 +5,7 @@ import { startStandaloneServer } from "@apollo/server/standalone";
 
 import typeDefs from "./graphql/typeDefs.js";
 import resolvers from "./graphql/resolvers.js";
+import { createLoaders } from "./graphql/loaders.js";
 
 import { connectDB } from "./config/database.js";
 import { getUserFromToken } from "./middleware/auth.js";
@@ -30,7 +31,10 @@ const { url } = await startStandaloneServer(server, {
 
     const user = await getUserFromToken(token);
 
-    return { user };
+    return {
+      user,
+      loaders: createLoaders()
+    };
   }
 });
 
