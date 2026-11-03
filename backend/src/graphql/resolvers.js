@@ -1,6 +1,8 @@
 import AuthService from "../services/AuthService.js";
 import EventService from "../services/EventService.js";
+import RegistrationService from "../services/RegistrationService.js";
 import { requireAuth } from "../middleware/auth.js";
+
 
 const resolvers = {
   Query: {
@@ -19,6 +21,14 @@ const resolvers = {
 
     event: (_, { id }) => {
       return EventService.getEvent(id);
+    },
+
+    myRegistrations: (_, __, { user }) => {
+      return RegistrationService.myRegistrations(user);
+    },
+
+    eventRegistrations: (_, { eventId }, { user }) => {
+      return RegistrationService.eventRegistrations(eventId, user);
     }
   },
 
@@ -45,6 +55,14 @@ const resolvers = {
 
     cancelEvent: (_, { id }, { user }) => {
       return EventService.cancel(id, user);
+    },
+
+    registerForEvent: (_, { eventId }, { user }) => {
+      return RegistrationService.register(eventId, user);
+    },
+
+    cancelRegistration: (_, { id }, { user }) => {
+      return RegistrationService.cancel(id, user);
     }
   },
 
