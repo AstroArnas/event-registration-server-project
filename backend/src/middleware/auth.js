@@ -33,3 +33,14 @@ export function requireRole(user, roles) {
 
   return user;
 }
+
+export function checkOwnership(user, event) {
+  requireAuth(user);
+
+  if (
+    user.role !== "ADMIN" &&
+    event.organizer.toString() !== user._id.toString()
+  ) {
+    throw new Error("You cannot manage this event");
+  }
+}
