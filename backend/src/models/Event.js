@@ -52,4 +52,9 @@ const eventSchema = new mongoose.Schema({
   
 }, { timestamps: true });
 
+eventSchema.index({
+  title: "text",
+  description: "text"
+});
+
 export default mongoose.model("Event", eventSchema);
